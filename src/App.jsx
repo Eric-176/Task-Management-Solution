@@ -1,5 +1,6 @@
 import "./navStyles.css";
-import { Link, Route, Routes } from "react-router-dom";
+import { Link, Navigate, Route, Routes } from "react-router-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const navSlide = () => {
   const burger = document.querySelector(".burger");
@@ -72,6 +73,7 @@ function App() {
         <Route path="/timer" element={<h1>timer</h1>}></Route>
         <Route path="/settings" element={<h1>settings</h1>}></Route>
         <Route path="/help" element={<h1>help</h1>}></Route>
+        <Route path="*" element={<Navigate to={"/"} />}></Route>
       </Routes>
     </>
   );
