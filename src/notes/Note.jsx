@@ -24,19 +24,19 @@ export function Note({ onDelete }) {
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
-            <Link to={`/${note.id}/edit`}>
+            <Link to={`/notes/${note.id}/edit`}>
               <Button variant="primary">Edit</Button>
             </Link>
             <Button
               onClick={() => {
                 onDelete(note.id);
-                navigate("/");
+                navigate("/notes");
               }}
               variant="outline-danger"
             >
               Delete
             </Button>
-            <Link to="/">
+            <Link to="/notes">
               <Button variant="outline-secondary">Back</Button>
             </Link>
           </Stack>

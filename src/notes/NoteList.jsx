@@ -39,7 +39,7 @@ export function NoteList({ availableTags, notes, onUpdateTag, onDeleteTag }) {
         </Col>
         <Col xs="auto">
           <Stack gap={2} direction="horizontal">
-            <Link to="/new">
+            <Link to="/notes/new">
               <Button variant="primary">Create</Button>
             </Link>
             <Button
@@ -108,7 +108,7 @@ function NoteCard({ id, title, tags }) {
   return (
     <Card
       as={Link}
-      to={`/${id}`}
+      to={`/notes/${id}`}
       className={`h-100 text-reset text-decoration-none ${styles.card}`}
     >
       <Card.Body>

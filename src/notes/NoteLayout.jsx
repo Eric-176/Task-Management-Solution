@@ -9,7 +9,7 @@ export function NoteLayout({ notes }) {
   const { id } = useParams();
   const note = notes.find((n) => n.id === id);
 
-  if (note == null) return <Navigate to="/" replace></Navigate>;
+  if (note == null) return <Navigate to="/notes" replace></Navigate>;
 
   return <Outlet context={note} />;
 }
