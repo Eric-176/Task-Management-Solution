@@ -1,6 +1,6 @@
 import "./navStyles.css";
 import { Link, Navigate, Route, Routes } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import NoteApplication from "./notes/NoteApplication.jsx";
 
 const navSlide = () => {
   const burger = document.querySelector(".burger");
@@ -68,7 +68,7 @@ function App() {
         <Route path="/" element={<h1>Hub</h1>}></Route>
         <Route path="/todo" element={<h1>todo</h1>}></Route>
         <Route path="/reminders" element={<h1>reminders</h1>}></Route>
-        <Route path="/notes" element={<h1>notes</h1>}></Route>
+        <Route path="/notes/*" element={<NoteApplication />}></Route>
         <Route path="/calendar" element={<h1>calendar</h1>}></Route>
         <Route path="/timer" element={<h1>timer</h1>}></Route>
         <Route path="/settings" element={<h1>settings</h1>}></Route>
