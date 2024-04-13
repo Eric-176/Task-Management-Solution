@@ -1,7 +1,9 @@
 import "./navStyles.css";
 import { Link, Navigate, Route, Routes } from "react-router-dom";
 import NoteApplication from "./notes/NoteApplication.jsx";
+import Settings from "./settings/Settings.tsx";
 import TodoApp from "./todo/TodoApp.tsx";
+import { useState, useEffect } from "react";
 
 const navSlide = () => {
   const burger = document.querySelector(".burger");
@@ -27,6 +29,27 @@ const navSlide = () => {
 };
 
 function App() {
+  const [settings, setSettings] = useState([
+    { id: "todoSetting", checked: true },
+    { id: "remindersSetting", checked: true },
+    { id: "notesSetting", checked: true },
+    { id: "calendarSetting", checked: true },
+    { id: "timerSetting", checked: true },
+  ]);
+  useEffect(() => {
+    for (let i = 0; i < settings.length; i++) {
+      const link = document.getElementById(settings[i].id);
+      if (!settings[i].checked) {
+        console.log(settings[i].id);
+        link.style.display = "none";
+      }
+      if (settings[i].checked) {
+        console.log(settings[i].id);
+        link.style.display = "block";
+      }
+    }
+  }, [settings]);
+
   return (
     <>
       <nav>
@@ -37,19 +60,19 @@ function App() {
           <li>
             <Link to="/">Home</Link>
           </li>
-          <li>
+          <li id="todoSetting">
             <Link to="/todo">Todo</Link>
           </li>
-          <li>
+          <li id="remindersSetting">
             <Link to="/reminders">Reminders</Link>
           </li>
-          <li>
+          <li id="notesSetting">
             <Link to="/notes">Notes</Link>
           </li>
-          <li>
+          <li id="calendarSetting">
             <Link to="/calendar">Calendar</Link>
           </li>
-          <li>
+          <li id="timerSetting">
             <Link to="/timer">Timer</Link>
           </li>
           <li>
@@ -72,7 +95,10 @@ function App() {
         <Route path="/notes/*" element={<NoteApplication />}></Route>
         <Route path="/calendar" element={<h1>calendar</h1>}></Route>
         <Route path="/timer" element={<h1>timer</h1>}></Route>
-        <Route path="/settings" element={<h1>settings</h1>}></Route>
+        <Route
+          path="/settings"
+          element={<Settings settings={settings} setSettings={setSettings} />}
+        ></Route>
         <Route path="/help" element={<h1>help</h1>}></Route>
         <Route path="*" element={<Navigate to={"/"} />}></Route>
       </Routes>
