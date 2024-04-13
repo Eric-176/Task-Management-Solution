@@ -1,6 +1,7 @@
 import "./navStyles.css";
 import { Link, Navigate, Route, Routes } from "react-router-dom";
 import NoteApplication from "./notes/NoteApplication.jsx";
+import TodoApp from "./todo/TodoApp.tsx";
 
 const navSlide = () => {
   const burger = document.querySelector(".burger");
@@ -66,7 +67,7 @@ function App() {
       </nav>
       <Routes>
         <Route path="/" element={<h1>Hub</h1>}></Route>
-        <Route path="/todo" element={<h1>todo</h1>}></Route>
+        <Route path="/todo" element={<TodoApp />}></Route>
         <Route path="/reminders" element={<h1>reminders</h1>}></Route>
         <Route path="/notes/*" element={<NoteApplication />}></Route>
         <Route path="/calendar" element={<h1>calendar</h1>}></Route>

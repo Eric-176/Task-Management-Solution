@@ -1,0 +1,296 @@
+:root {
+  --clr-primary: rgb(54, 112, 199);
+  --clr-light: #f4f4f4;
+  --clr-dark: #333;
+  --clr-warning: rgb(255, 0, 0);
+}
+
+*,
+*::before,
+*::after {
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.TodoAppBody {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.TodoApp {
+  margin: 0;
+  font-family: "Work Sans", sans-serif;
+  font-weight: 300;
+  font-size: 1.5rem;
+  background-color: rgb(255, 255, 255);
+  color: black;
+  width: 50rem;
+  display: flex;
+}
+
+.title {
+  text-align: center;
+  font-size: calc(3vw + 1rem);
+  font-weight: 900;
+  color: rgba(0, 0, 0, 0.1);
+  letter-spacing: 1px;
+  margin: -0.3em 0 0.5em;
+}
+
+.task-list {
+  padding-left: 1.1rem;
+  font-size: 1.2rem;
+  line-height: 1.7;
+  list-style: circle;
+}
+
+.task-list li:hover {
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.all-tasks {
+  margin-right: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.list-name {
+  cursor: pointer;
+}
+
+.list-name:hover {
+  opacity: 0.7;
+}
+
+form {
+  display: flex;
+}
+
+.btn {
+  cursor: pointer;
+  background: 0;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+
+.btn.create {
+  font-size: 1.5rem;
+  font-weight: 900;
+  margin-right: 0.25em;
+  transition: opacity 160ms ease-in;
+}
+
+.btn.create:hover {
+  opacity: 0.7;
+}
+
+.btn.delete {
+  opacity: 0.7;
+  font-size: 1rem;
+  transition: color 200ms;
+}
+
+.btn.delete:hover {
+  color: var(--clr-warning);
+}
+
+.new {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  border-bottom: 1px solid currentColor;
+  font-size: inherit;
+  outline: none;
+  padding: 0.25em;
+
+  transition: border-bottom 100ms ease-in;
+  order: 2;
+}
+
+.new::placeholder {
+  color: inherit;
+  opacity: 0.4;
+}
+
+.new:focus {
+  border-bottom-width: 3px;
+}
+
+.new:focus::placeholder {
+  opacity: 0.15;
+}
+
+.new.list {
+  font-size: 1.2rem;
+}
+
+.new.task {
+  margin-bottom: 0;
+}
+
+.active-list {
+  font-weight: 700;
+}
+
+.todo-list {
+  --spacer: 2rem;
+  background: rgb(237, 237, 237);
+  color: rgba(30, 30, 30, 0.928);
+  flex-grow: 1;
+}
+
+.todo-header {
+  padding: var(--spacer);
+  background: #d9d9d9;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.list-title {
+  margin: 0 1em 0 0;
+}
+
+.task-count {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.todo-body {
+  padding: var(--spacer);
+  position: relative;
+}
+
+.new-task-creator .create {
+  color: rgb(54, 112, 199);
+}
+
+.task label {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+}
+
+.task {
+  position: relative;
+  margin-bottom: 1.5em;
+}
+
+.task::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  left: 0;
+  bottom: -0.5em;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.15;
+}
+
+[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+}
+
+.custom-checkbox {
+  --size: 0.75em;
+  display: inline-block;
+  width: var(--size);
+  height: var(--size);
+  margin-right: var(--size);
+  cursor: pointer;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  transform: scale(1);
+  transition: transform 300ms ease-in-out;
+}
+
+.task:hover .custom-checkbox,
+[type="checkbox"]:focus + label .custom-checkbox {
+  transform: scale(1.2);
+  color: rgb(54, 112, 199);
+}
+
+[type="checkbox"]:checked + label .custom-checkbox {
+  background: rgb(54, 112, 199);
+  border-color: rgb(54, 112, 199);
+  box-shadow: inset 0 0 0 2px white;
+}
+
+[type="checkbox"]:checked + label {
+  opacity: 0.5;
+}
+
+.task label::after {
+  content: "";
+  position: absolute;
+  left: 1.5em;
+  right: 0;
+  height: 3px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 150ms ease-in-out;
+}
+
+[type="checkbox"]:checked + label::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.delete-stuff {
+  display: flex;
+  justify-content: space-evenly;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -35px;
+  color: black;
+}
+
+.downloadSavebuttons {
+  height: 25px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.downloadSavebuttons #downloadButton {
+  box-shadow: none;
+  border: none;
+  font-size: 1rem;
+  border-radius: 10px;
+  width: 110px;
+  text-align: center;
+}
+
+.downloadSavebuttons #saveButton {
+  font-size: 1rem;
+  border: none;
+  color: black;
+  text-decoration: none;
+  border-radius: 10px;
+  width: 110px;
+  text-align: center;
+}
+
+.downloadSavebuttons #downloadButton:hover {
+  opacity: 0.8;
+  border: 1px solid #9f9f9f;
+  transition: opacity 0.15s ease-in;
+  transition: border 0.3s ease-in;
+}
+
+.downloadSavebuttons #saveButton:hover {
+  opacity: 0.8;
+  border: 1px solid #9f9f9f;
+  transition: opacity 0.15s ease-in;
+  transition: border 0.5s ease-in;
+}
+
+input[type="file"] {
+  display: none;
+}
