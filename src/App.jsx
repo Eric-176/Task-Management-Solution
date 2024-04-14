@@ -3,6 +3,7 @@ import { Link, Navigate, Route, Routes } from "react-router-dom";
 import NoteApplication from "./notes/NoteApplication.jsx";
 import Settings from "./settings/Settings.tsx";
 import TodoApp from "./todo/TodoApp.tsx";
+import Timer from "./timer/Timer.tsx";
 import { useState, useEffect } from "react";
 
 const navSlide = () => {
@@ -40,11 +41,9 @@ function App() {
     for (let i = 0; i < settings.length; i++) {
       const link = document.getElementById(settings[i].id);
       if (!settings[i].checked) {
-        console.log(settings[i].id);
         link.style.display = "none";
       }
       if (settings[i].checked) {
-        console.log(settings[i].id);
         link.style.display = "block";
       }
     }
@@ -94,7 +93,7 @@ function App() {
         <Route path="/reminders" element={<h1>reminders</h1>}></Route>
         <Route path="/notes/*" element={<NoteApplication />}></Route>
         <Route path="/calendar" element={<h1>calendar</h1>}></Route>
-        <Route path="/timer" element={<h1>timer</h1>}></Route>
+        <Route path="/timer" element={<Timer />}></Route>
         <Route
           path="/settings"
           element={<Settings settings={settings} setSettings={setSettings} />}

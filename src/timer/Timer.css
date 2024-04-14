@@ -1,0 +1,23 @@
+.TimerApp {
+  font-size: larger;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.TimerApp input {
+  margin: 10px;
+  width: 50px;
+}
+
+.TimerApp .timer .display {
+  font-size: 7rem;
+}
+
+.TimerApp .timerButtons .timerButton {
+  margin: 10px;
+  width: 80px;
+  border-radius: 10px;
+}
