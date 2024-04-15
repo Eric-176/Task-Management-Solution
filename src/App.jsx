@@ -1,56 +1,21 @@
+import { Route, Routes } from "react-router-dom";
+import Home from "./Home";
+import Login from "./login/Login";
 import "./navStyles.css";
-import { Link, Navigate, Route, Routes } from "react-router-dom";
-import NoteApplication from "./notes/NoteApplication.jsx";
-import Settings from "./settings/Settings.tsx";
-import TodoApp from "./todo/TodoApp.tsx";
-import Timer from "./timer/Timer.tsx";
-import { useState, useEffect } from "react";
-
-const navSlide = () => {
-  const burger = document.querySelector(".burger");
-  const nav = document.querySelector(".nav-links");
-  const navLinks = document.querySelectorAll(".nav-links li");
-
-  //toggle nav
-  nav.classList.toggle("nav-active");
-
-  //animate links
-  navLinks.forEach((link, index) => {
-    if (link.style.animation) {
-      link.style.animation = "";
-    } else {
-      link.style.animation = `navLinkFade 0.3s ease forwards ${
-        index / 8 + 0.45
-      }s`;
-    }
-  });
-
-  //animate burger
-  burger.classList.toggle("toggle");
-};
 
 function App() {
-  const [settings, setSettings] = useState([
-    { id: "todoSetting", checked: true },
-    { id: "remindersSetting", checked: true },
-    { id: "notesSetting", checked: true },
-    { id: "calendarSetting", checked: true },
-    { id: "timerSetting", checked: true },
-  ]);
-  useEffect(() => {
-    for (let i = 0; i < settings.length; i++) {
-      const link = document.getElementById(settings[i].id);
-      if (!settings[i].checked) {
-        link.style.display = "none";
-      }
-      if (settings[i].checked) {
-        link.style.display = "block";
-      }
-    }
-  }, [settings]);
-
   return (
-    <>
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/*" element={<Home />} />
+    </Routes>
+  );
+}
+
+export default App;
+
+{
+  /* <>
       <nav>
         <div className="logo">
           <h4>The Nav</h4>
@@ -101,8 +66,5 @@ function App() {
         <Route path="/help" element={<h1>help</h1>}></Route>
         <Route path="*" element={<Navigate to={"/"} />}></Route>
       </Routes>
-    </>
-  );
+    </> */
 }
-
-export default App;
