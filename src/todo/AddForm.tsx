@@ -35,16 +35,16 @@ function AddForm({
       }
     }
 
-    if (lists[activeList!].tasks.length > 5) {
+    if ((lists[activeList!]?.tasks.length || 0) > 5 && type === "task") {
       alert("Too many tasks added. Please clear some tasks first.");
     }
-    if (lists.length > 8) {
+    if ((lists?.length || 0) > 8 && type === "list") {
       alert(
         "Too many lists have been created. Please delete some lists first."
       );
     }
 
-    if (type === "task" && lists[activeList!].tasks.length <= 5) {
+    if (type === "task" && (lists[activeList!]?.tasks.length || 0) <= 5) {
       const newTasks = [
         ...tasks!,
         {
@@ -62,7 +62,11 @@ function AddForm({
         }
       });
       setLists!(newLists);
-    } else if (type === "list" && !listAlreadyExists && lists.length <= 8) {
+    } else if (
+      type === "list" &&
+      !listAlreadyExists &&
+      (lists?.length || 0) <= 8
+    ) {
       setLists!((previousLists: listType[]) => {
         return [
           ...previousLists,

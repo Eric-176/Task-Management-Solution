@@ -48,7 +48,7 @@ function SaveAndImport({ lists, setLists, activeList }: SaveAndImportProps) {
   return (
     <div className="downloadSavebuttons">
       <a href="#" id="saveButton" download="todo.json">
-        Save List
+        Download List
       </a>
       <label id="downloadButton" htmlFor="import">
         Import List
