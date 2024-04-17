@@ -22,12 +22,17 @@ function Login() {
 
   return (
     <div className="googleButton">
-      <img src="../src/assets/logo.png" className="logo" alt="Plan.exe" />
-      <GoogleLogin
-        state_cookie_domain="single_host_origin"
-        onSuccess={handleSuccess}
-        onError={handleError}
-      />
+      <div className="logo">
+        <div className="logo-p">P</div>PLAN.EXE
+      </div>
+      <div className="login">
+        <h1>Login</h1>
+        <GoogleLogin
+          state_cookie_domain="single_host_origin"
+          onSuccess={handleSuccess}
+          onError={handleError}
+        />
+      </div>
     </div>
   );
 }

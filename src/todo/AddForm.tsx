@@ -35,7 +35,16 @@ function AddForm({
       }
     }
 
-    if (type === "task") {
+    if (lists[activeList!].tasks.length > 5) {
+      alert("Too many tasks added. Please clear some tasks first.");
+    }
+    if (lists.length > 8) {
+      alert(
+        "Too many lists have been created. Please delete some lists first."
+      );
+    }
+
+    if (type === "task" && lists[activeList!].tasks.length <= 5) {
       const newTasks = [
         ...tasks!,
         {
@@ -53,7 +62,7 @@ function AddForm({
         }
       });
       setLists!(newLists);
-    } else if (type === "list" && !listAlreadyExists) {
+    } else if (type === "list" && !listAlreadyExists && lists.length <= 8) {
       setLists!((previousLists: listType[]) => {
         return [
           ...previousLists,
@@ -68,6 +77,7 @@ function AddForm({
     <form action="" id="form" onSubmit={handleSubmit}>
       <input
         type="text"
+        maxLength={22}
         className={`new ${type} input`}
         placeholder={`new ${type}`}
         aria-label={`new ${type}`}

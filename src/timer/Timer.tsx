@@ -8,47 +8,50 @@ function Timer() {
   const timerId: any = useRef();
 
   function handleHours(e: any) {
-    if (!e.target.value) {
+    const userInput = Number(e.target.value) + 0;
+    console.log(userInput);
+    if (!userInput) {
       const newTime = "00" + time.substring(2, 8);
       setTime(newTime);
-    } else if (e.target.value >= 0 && e.target.value <= 24) {
-      if (e.target.value <= 9) {
-        const newTime = "0" + e.target.value + time.substring(2, 8);
+    } else if (userInput >= 0 && userInput <= 24) {
+      if (userInput <= 9) {
+        const newTime = "0" + userInput + time.substring(2, 8);
         setTime(newTime);
       } else {
-        const newTime = e.target.value + time.substring(2, 8);
+        const newTime = userInput + time.substring(2, 8);
         setTime(newTime);
       }
     }
   }
 
   function handleMinutes(e: any) {
-    if (!e.target.value) {
+    const userInput = Number(e.target.value) + 0;
+    if (!userInput) {
       const newTime = time.substring(0, 3) + "00" + time.substring(5, 8);
       setTime(newTime);
-    } else if (e.target.value >= 0 && e.target.value <= 60) {
-      if (e.target.value <= 9) {
+    } else if (userInput >= 0 && userInput <= 60) {
+      if (userInput <= 9) {
         const newTime =
-          time.substring(0, 3) + "0" + e.target.value + time.substring(5, 8);
+          time.substring(0, 3) + "0" + userInput + time.substring(5, 8);
         setTime(newTime);
       } else {
-        const newTime =
-          time.substring(0, 3) + e.target.value + time.substring(5, 8);
+        const newTime = time.substring(0, 3) + userInput + time.substring(5, 8);
         setTime(newTime);
       }
     }
   }
 
   function handleSeconds(e: any) {
-    if (!e.target.value) {
+    const userInput = Number(e.target.value) + 0;
+    if (!userInput) {
       const newTime = time.substring(0, 6) + "00";
       setTime(newTime);
-    } else if (e.target.value >= 0 && e.target.value <= 60) {
-      if (e.target.value <= 9) {
-        const newTime = time.substring(0, 6) + "0" + e.target.value;
+    } else if (userInput >= 0 && userInput <= 60) {
+      if (userInput <= 9) {
+        const newTime = time.substring(0, 6) + "0" + userInput;
         setTime(newTime);
       } else {
-        const newTime = time.substring(0, 6) + e.target.value;
+        const newTime = time.substring(0, 6) + userInput;
         setTime(newTime);
       }
     }
