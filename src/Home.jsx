@@ -1,12 +1,5 @@
 import "./navStyles.css";
-import {
-  Link,
-  Navigate,
-  Route,
-  Routes,
-  redirect,
-  useNavigate,
-} from "react-router-dom";
+import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import NoteApplication from "./notes/NoteApplication.jsx";
 import Settings from "./settings/Settings.tsx";
 import TodoApp from "./todo/TodoApp.tsx";
@@ -14,6 +7,9 @@ import Timer from "./timer/Timer.tsx";
 import Hub from "./hub/Hub.tsx";
 import { useState, useEffect } from "react";
 import { googleId } from "./login/Login.tsx";
+import Calendar from "./calendar/Calendar.tsx";
+import Reminders from "./reminders/Reminders.tsx";
+import Help from "./help/Help.tsx";
 
 function Home() {
   const navigate = useNavigate();
@@ -69,9 +65,12 @@ function Home() {
   return (
     <>
       <nav>
-        <div className="logo">
-          <h4>Plan.exe</h4>
+        <div className="burger" onClick={() => navSlide()}>
+          <div className="line1"></div>
+          <div className="line2"></div>
+          <div className="line3"></div>
         </div>
+
         <ul className="nav-links">
           <li>
             <Link to="/">Home</Link>
@@ -98,24 +97,24 @@ function Home() {
             <Link to="/help">Help</Link>
           </li>
         </ul>
-        <div className="burger" onClick={() => navSlide()}>
-          <div className="line1"></div>
-          <div className="line2"></div>
-          <div className="line3"></div>
+
+        <div className="logo">
+          <h4>Plan.exe</h4>
         </div>
+        <div className="navBarStuff"></div>
       </nav>
       <Routes>
         <Route path="/" element={<Hub />}></Route>
         <Route path="/todo" element={<TodoApp />}></Route>
-        <Route path="/reminders" element={<h1>reminders</h1>}></Route>
+        <Route path="/reminders" element={<Reminders />}></Route>
         <Route path="/notes/*" element={<NoteApplication />}></Route>
-        <Route path="/calendar" element={<h1>calendar</h1>}></Route>
+        <Route path="/calendar" element={<Calendar />}></Route>
         <Route path="/timer" element={<Timer />}></Route>
         <Route
           path="/settings"
           element={<Settings settings={settings} setSettings={setSettings} />}
         ></Route>
-        <Route path="/help" element={<h1>help</h1>}></Route>
+        <Route path="/help" element={<Help />}></Route>
         <Route path="*" element={<Navigate to={"/"} />}></Route>
       </Routes>
     </>

@@ -13,7 +13,7 @@ function Timer() {
     if (!userInput) {
       const newTime = "00" + time.substring(2, 8);
       setTime(newTime);
-    } else if (userInput >= 0 && userInput <= 24) {
+    } else if (userInput >= 0 && userInput <= 99) {
       if (userInput <= 9) {
         const newTime = "0" + userInput + time.substring(2, 8);
         setTime(newTime);
@@ -29,7 +29,7 @@ function Timer() {
     if (!userInput) {
       const newTime = time.substring(0, 3) + "00" + time.substring(5, 8);
       setTime(newTime);
-    } else if (userInput >= 0 && userInput <= 60) {
+    } else if (userInput >= 0 && userInput <= 59) {
       if (userInput <= 9) {
         const newTime =
           time.substring(0, 3) + "0" + userInput + time.substring(5, 8);
@@ -46,7 +46,7 @@ function Timer() {
     if (!userInput) {
       const newTime = time.substring(0, 6) + "00";
       setTime(newTime);
-    } else if (userInput >= 0 && userInput <= 60) {
+    } else if (userInput >= 0 && userInput <= 59) {
       if (userInput <= 9) {
         const newTime = time.substring(0, 6) + "0" + userInput;
         setTime(newTime);

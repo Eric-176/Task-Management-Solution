@@ -75,6 +75,7 @@ function AddForm({
       });
       setActiveList!(0);
     }
+    e.target.reset();
   }
 
   return (

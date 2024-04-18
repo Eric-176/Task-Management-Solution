@@ -1,0 +1,85 @@
+@import url("https://fonts.googleapis.com/css2?family=Architects+Daughter&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+
+.calendarApp {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Share Tech Mono";
+}
+
+.calendarApp .month {
+  color: rgb(0, 15, 27);
+  display: flex;
+  justify-content: space-around;
+  width: 60vw;
+}
+
+.calendarApp .month div {
+  display: inline;
+}
+
+.calendar {
+  padding: 10px;
+  min-width: 763px;
+  width: 60vw;
+  height: 60vh;
+  margin: 1em;
+  border: 7px solid hsl(210deg 8% 50%);
+  background-color: rgb(244, 244, 244);
+  border-radius: 10px;
+  display: grid;
+  grid-template-columns: repeat(7, 2fr);
+  grid-template-rows: 1fr repeat(6, 2fr);
+  gap: 7px;
+}
+
+.calendar .day-title {
+  font-size: larger;
+  color: rgb(50, 50, 50);
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /*font-weight: bold;*/
+}
+
+.calendar .day {
+  display: grid;
+  place-content: start center;
+  padding: 10px;
+  border: 2px solid hsl(210deg 8% 50%);
+  border-radius: 10px;
+  color: rgb(50, 50, 50);
+  font-size: large;
+  opacity: 0.7;
+}
+
+.calendar .day:hover {
+  opacity: 1;
+  font-size: 1.5em;
+  border-color: black;
+  transition: font-size 1s ease-out;
+  transition: border-color 0.4s ease-in-out;
+}
+
+.arrow-left {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid blue;
+}
+
+.arrow-right {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 10px solid green;
+}
