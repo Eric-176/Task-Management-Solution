@@ -1,8 +1,7 @@
 import React from "react";
 import "./Hub.css";
-import { googleId } from "../login/Login";
 
-function Hub() {
+function Hub({ googleId }) {
   return <div className="hubApp">Welcome {googleId}</div>;
 }
 

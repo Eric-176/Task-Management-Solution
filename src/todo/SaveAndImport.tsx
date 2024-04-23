@@ -12,6 +12,7 @@ type SaveAndImportProps = {
 function SaveAndImport({ lists, setLists, activeList }: SaveAndImportProps) {
   useEffect(() => {
     const download = document.getElementById("saveButton") as HTMLAnchorElement;
+    //Sets contents of the Blob to contain the current todo list
     const blob1 = new Blob([JSON.stringify(lists[activeList])], {
       type: "text/plain",
     });
@@ -25,16 +26,15 @@ function SaveAndImport({ lists, setLists, activeList }: SaveAndImportProps) {
     fr.addEventListener("load", () => {
       let listExists = false;
       lists.map((list: listType) => {
+        //Checks to see if the list being imported already exists
         if (JSON.parse(fr.result as string).title === list.title) {
           listExists = true;
           alert("List already exists");
         }
       });
       if (!listExists) {
+        //Adds the imported list into the application
         setLists((previousLists: listType[]) => {
-          console.log(
-            updateListIds([...previousLists, JSON.parse(fr.result as string)])
-          );
           return updateListIds([
             ...previousLists,
             JSON.parse(fr.result as string),

@@ -73,47 +73,45 @@ function NoteApplication() {
   }
 
   return (
-    <>
-      <Container className="my-4">
-        <Routes>
+    <Container className="my-4">
+      <Routes>
+        <Route
+          index
+          element={
+            <NoteList
+              notes={notesWithTags}
+              availableTags={tags}
+              onUpdateTag={updateTag}
+              onDeleteTag={deleteTag}
+            />
+          }
+        />
+        <Route
+          path="new"
+          element={
+            <NewNote
+              onSubmit={onCreateNote}
+              onAddTag={addTag}
+              availableTags={tags}
+            />
+          }
+        />
+        <Route path=":id" element={<NoteLayout notes={notesWithTags} />}>
+          <Route index element={<Note onDelete={onDeleteNote} />}></Route>
           <Route
-            index
+            path="edit"
             element={
-              <NoteList
-                notes={notesWithTags}
-                availableTags={tags}
-                onUpdateTag={updateTag}
-                onDeleteTag={deleteTag}
-              />
-            }
-          />
-          <Route
-            path="new"
-            element={
-              <NewNote
-                onSubmit={onCreateNote}
+              <EditNote
+                onSubmit={onUpdateNote}
                 onAddTag={addTag}
                 availableTags={tags}
               />
             }
-          />
-          <Route path=":id" element={<NoteLayout notes={notesWithTags} />}>
-            <Route index element={<Note onDelete={onDeleteNote} />}></Route>
-            <Route
-              path="edit"
-              element={
-                <EditNote
-                  onSubmit={onUpdateNote}
-                  onAddTag={addTag}
-                  availableTags={tags}
-                />
-              }
-            ></Route>
-          </Route>
-          <Route path="*" element={<Navigate to=".." />}></Route>
-        </Routes>
-      </Container>
-    </>
+          ></Route>
+        </Route>
+        <Route path="*" element={<Navigate to=".." />}></Route>
+      </Routes>
+    </Container>
   );
 }
 

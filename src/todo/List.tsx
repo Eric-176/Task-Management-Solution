@@ -13,16 +13,16 @@ function List({
   activeList,
   setActiveList,
 }: ListsProps) {
+  //Updates tasks whenever the list being displayed changes
   useEffect(() => {
     if (lists.length) {
       setTasks(lists[activeList].tasks);
     }
   }, [activeList]);
 
-  //Import Export
-  // User Profiles in the future
-
   function toggleChecked(e: any) {
+    //Loops through tasks to find the task checked
+    //If it was checked it gets unchecked and vice versa
     const newTasks = tasks?.map((task: taskType) => {
       if (task.taskId == e.target.id.substr(-1)) {
         if (task.checked === true) {
@@ -50,7 +50,8 @@ function List({
     const newLists = lists?.filter((list: listType) => {
       return list.listId !== lists[activeList].listId;
     });
-    setLists(updateListIds(newLists)); // Sets lists to an array of lists where the list Id is updated to match the index of the list
+    // Sets lists to an array of lists where the list Id is updated to match the index of the list
+    setLists(updateListIds(newLists));
     setActiveList(0);
     if (!newLists.length) {
       setTasks([]);
@@ -60,6 +61,7 @@ function List({
   }
 
   function updateLists(newTasks: taskType[]) {
+    //Updates the list to include the newly added or altered task
     const newLists = lists.map((list: listType) => {
       if (list.listId === lists[activeList].listId) {
         return {
@@ -84,37 +86,44 @@ function List({
 
       <div className="todo-body">
         <div className="tasks">
-          {tasks?.map((task: taskType) => {
-            return (
-              <div className="task" key={task.taskId}>
-                <input
-                  onChange={toggleChecked}
-                  type="checkbox"
-                  id={"task-" + String(task.taskId)}
-                  checked={task.checked}
-                />
-                <label htmlFor={`task-${task.taskId}`}>
-                  <span className="custom-checkbox"></span>
-                  {task.text}
-                </label>
-              </div>
-            );
-          })}
+          {
+            // Loops through tasks returning each task
+            tasks?.map((task: taskType) => {
+              return (
+                <div className="task" key={task.taskId}>
+                  <input
+                    onChange={toggleChecked}
+                    type="checkbox"
+                    id={"task-" + String(task.taskId)}
+                    checked={task.checked}
+                  />
+                  <label htmlFor={`task-${task.taskId}`}>
+                    <span className="custom-checkbox"></span>
+                    {task.text}
+                  </label>
+                </div>
+              );
+            })
+          }
         </div>
-        {lists.length ? (
-          <div className="new-task-creator">
-            <AddForm
-              type={"task"}
-              tasks={tasks}
-              setTasks={setTasks}
-              lists={lists}
-              setLists={setLists}
-              activeList={activeList}
-            />
-          </div>
-        ) : (
-          ""
-        )}
+
+        {
+          //If there is a todo list allows you to add tasks to it
+          lists.length ? (
+            <div className="new-task-creator">
+              <AddForm
+                type={"task"}
+                tasks={tasks}
+                setTasks={setTasks}
+                lists={lists}
+                setLists={setLists}
+                activeList={activeList}
+              />
+            </div>
+          ) : (
+            ""
+          )
+        }
 
         <div className="delete-stuff">
           <button onClick={handleTaskDeletion} className="btn delete">

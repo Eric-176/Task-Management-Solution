@@ -18,6 +18,7 @@ export function NoteForm({
   const navigate = useNavigate();
 
   function handleSubmit(e) {
+    //removes default submit input behavior like causing the whole page to keep refreshing
     e.preventDefault();
 
     onSubmit({

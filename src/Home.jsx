@@ -6,13 +6,17 @@ import TodoApp from "./todo/TodoApp.tsx";
 import Timer from "./timer/Timer.tsx";
 import Hub from "./hub/Hub.tsx";
 import { useState, useEffect } from "react";
-import { googleId } from "./login/Login.tsx";
+import { LOGIN_LOCAL_STORAGE } from "./App.jsx";
 import Calendar from "./calendar/Calendar.tsx";
 import Reminders from "./reminders/Reminders.tsx";
 import Help from "./help/Help.tsx";
 
-function Home() {
+const USER_DATA = "Planexe.userData";
+
+function Home({ googleId }) {
   const navigate = useNavigate();
+  const [userList, setUserList] = useState([]);
+  const [userData, setUserData] = useState([]);
   const [settings, setSettings] = useState([
     { id: "todoSetting", checked: true },
     { id: "remindersSetting", checked: true },
@@ -22,10 +26,38 @@ function Home() {
   ]);
 
   useEffect(() => {
-    if (googleId === null) {
-      navigate("/login");
+    const storedUserData = localStorage.getItem(USER_DATA);
+    if (storedUserData) {
+      if (JSON.parse(storedUserData) != userList) {
+        setUserList(JSON.parse(storedUserData));
+        if (googleId) {
+          let userExists = false;
+          for (let i = 0; i < JSON.parse(storedUserData).length; i++) {
+            console.log(JSON.parse(storedUserData)[i]);
+            if (JSON.parse(storedUserData)[i].id == googleId) {
+              console.log("user exists");
+              userExists = true;
+              setUserData(JSON.parse(storedUserData)[i].data);
+            }
+          }
+          if (!userExists) {
+            setUserList((previousUserList) => {
+              return [...previousUserList, { id: googleId, data: [] }];
+            });
+          }
+          console.log(userExists);
+        }
+      }
+    } else if (googleId) {
+      setUserList([{ id: googleId, data: [] }]);
     }
-  }, []);
+  }, [googleId]);
+
+  useEffect(() => {
+    if (userList.length) {
+      localStorage.setItem(USER_DATA, JSON.stringify(userList));
+    }
+  }, [userList]);
 
   useEffect(() => {
     for (let i = 0; i < settings.length; i++) {
@@ -38,6 +70,11 @@ function Home() {
       }
     }
   }, [settings]);
+
+  function handleLogout() {
+    localStorage.setItem(LOGIN_LOCAL_STORAGE, "");
+    navigate("/login");
+  }
 
   const navSlide = () => {
     const burger = document.querySelector(".burger");
@@ -101,10 +138,14 @@ function Home() {
         <div className="logo">
           <h4>Plan.exe</h4>
         </div>
-        <div className="navBarStuff"></div>
+        <div className="navBarStuff">
+          <div className="logout">
+            <button onClick={handleLogout}>Logout</button>
+          </div>
+        </div>
       </nav>
       <Routes>
-        <Route path="/" element={<Hub />}></Route>
+        <Route path="/" element={<Hub googleId={googleId} />}></Route>
         <Route path="/todo" element={<TodoApp />}></Route>
         <Route path="/reminders" element={<Reminders />}></Route>
         <Route path="/notes/*" element={<NoteApplication />}></Route>

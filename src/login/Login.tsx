@@ -3,10 +3,9 @@ import { GoogleLogin } from "@react-oauth/google";
 import "./Login.css";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
+import { LOGIN_LOCAL_STORAGE } from "../App.jsx";
 
-export let googleId = null;
-
-function Login() {
+function Login({ setGoogleId }) {
   const navigate = useNavigate();
 
   const handleError = () => {
@@ -14,10 +13,14 @@ function Login() {
   };
 
   const handleSuccess = (response?: any) => {
-    googleId = response.clientId;
     const decoded = jwtDecode(response?.credential);
-    console.log(googleId);
-    navigate("/", { replace: true });
+    //Sets googleId to user response or empty string if it doesn't exist
+    if (decoded) {
+      const newGoogleId = decoded.sub!;
+      setGoogleId(newGoogleId);
+      localStorage.setItem(LOGIN_LOCAL_STORAGE, JSON.stringify(newGoogleId));
+      navigate("/", { replace: true });
+    }
   };
 
   return (

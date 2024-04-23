@@ -28,6 +28,7 @@ function AddForm({
     let listAlreadyExists = false;
 
     if (lists?.length || 0) {
+      // Loops lists and checks if the list added already exists
       for (let i = 0; i < lists!.length; i++) {
         if (lists![i].title === newThing) {
           listAlreadyExists = true;
@@ -35,6 +36,7 @@ function AddForm({
       }
     }
 
+    // Prevents the user from adding too many tasks or lists
     if ((lists[activeList!]?.tasks.length || 0) > 5 && type === "task") {
       alert("Too many tasks added. Please clear some tasks first.");
     }
@@ -54,6 +56,7 @@ function AddForm({
         },
       ];
       setTasks!(newTasks);
+      //Updates lists to reflect the addition of the task
       const newLists = lists?.map((previousList: listType) => {
         if (previousList.listId === lists[activeList!].listId) {
           return { ...previousList, tasks: newTasks };
@@ -75,7 +78,7 @@ function AddForm({
       });
       setActiveList!(0);
     }
-    e.target.reset();
+    e.target.reset(); //Clears the input field
   }
 
   return (

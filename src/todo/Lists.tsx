@@ -20,6 +20,8 @@ function Lists({
   setActiveList,
 }: ListsProps) {
   function handleActive(e: any) {
+    //Runs when a list is clicked
+    //Changes the active list so the clicked list can be displayed with its tasks
     if (lists.length && e.target.innerHTML !== lists[activeList].title) {
       setTasks(lists[activeList].tasks);
       for (let i = 0; i < lists.length; i++) {
@@ -36,25 +38,28 @@ function Lists({
     <div className="all-tasks">
       <h2 className="task-list-title">My lists</h2>
       <ul className="task-list">
-        {lists?.map((list: listType) => {
-          if (list === lists[activeList]) {
-            return (
-              <li
-                key={list.listId}
-                className="list active-list"
-                onClick={handleActive}
-              >
-                {list.title}
-              </li>
-            );
-          } else {
-            return (
-              <li key={list.listId} className="list" onClick={handleActive}>
-                {list.title}
-              </li>
-            );
-          }
-        })}
+        {
+          // Loops through lists array returning each list to be displayed
+          lists?.map((list: listType) => {
+            if (list === lists[activeList]) {
+              return (
+                <li
+                  key={list.listId}
+                  className="list active-list"
+                  onClick={handleActive}
+                >
+                  {list.title}
+                </li>
+              );
+            } else {
+              return (
+                <li key={list.listId} className="list" onClick={handleActive}>
+                  {list.title}
+                </li>
+              );
+            }
+          })
+        }
       </ul>
       <AddForm
         type={"list"}
