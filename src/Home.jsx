@@ -33,9 +33,7 @@ function Home({ googleId }) {
         if (googleId) {
           let userExists = false;
           for (let i = 0; i < JSON.parse(storedUserData).length; i++) {
-            console.log(JSON.parse(storedUserData)[i]);
             if (JSON.parse(storedUserData)[i].id == googleId) {
-              console.log("user exists");
               userExists = true;
               setUserData(JSON.parse(storedUserData)[i].data);
             }
@@ -45,7 +43,6 @@ function Home({ googleId }) {
               return [...previousUserList, { id: googleId, data: [] }];
             });
           }
-          console.log(userExists);
         }
       }
     } else if (googleId) {

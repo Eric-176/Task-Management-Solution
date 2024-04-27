@@ -4,7 +4,7 @@ import Lists from "./Lists.tsx";
 import "./TodoApp.css";
 import { useEffect, useState } from "react";
 
-const LOCAL_STORAGE_KEY = "todoApp.lists";
+const LOCAL_STORAGE_KEY = "Planexe.todo";
 
 export type taskType = {
   taskId: number;
