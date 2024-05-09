@@ -9,7 +9,6 @@ function Timer() {
 
   function handleHours(e: any) {
     const userInput = Number(e.target.value) + 0;
-    console.log(userInput);
     if (!userInput) {
       const newTime = "00" + time.substring(2, 8);
       setTime(newTime);
@@ -65,7 +64,14 @@ function Timer() {
       Number(time.substring(6, 8));
     timerId.current = setInterval(() => {
       let hours = String(Math.floor(timeRemaining.current / 60 / 60));
-      let minutes = String(Math.floor((timeRemaining.current % 60) / 60));
+      console.log(
+        timeRemaining.current -
+          (timeRemaining.current % 60) -
+          (timeRemaining.current - (timeRemaining.current % 60))
+      );
+      let minutes = String(
+        Math.floor((timeRemaining.current - (timeRemaining.current % 60)) / 60)
+      );
       let seconds = String(Math.floor(timeRemaining.current % 60));
       if (hours.length < 2) {
         hours = "0" + hours;
@@ -78,12 +84,12 @@ function Timer() {
       }
       const newTime =
         String(hours) + ":" + String(minutes) + ":" + String(seconds);
-      console.log(newTime);
       setTime(newTime);
-      if (timeRemaining.current !== 0) {
-        timeRemaining.current--;
-      } else {
+
+      if (timeRemaining.current < 1) {
         clearInterval(timerId.current);
+      } else {
+        timeRemaining.current--;
       }
     }, 1000);
   }
@@ -93,6 +99,7 @@ function Timer() {
   }
 
   function handleRestart() {
+    clearInterval(timerId.current);
     setTime(inputTime);
   }
 

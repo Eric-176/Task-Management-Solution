@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./Settings.css";
 
-const LOCAL_STORAGE_KEY = "Settings.settings";
+export const SETTINGS_STORAGE_KEY = "Settings.settings";
 
 type settings = setting[];
 
 type setting = {
   id: string;
   checked: boolean;
+  name: string;
+  route: string;
 };
 
 type SettingsProps = {
@@ -29,13 +31,13 @@ function Settings({ settings, setSettings }: SettingsProps) {
       }
     });
     setSettings(newSettings);
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newSettings));
+    localStorage.setItem(SETTINGS_STORAGE_KEY, JSON.stringify(newSettings));
   }
 
   useEffect(() => {
-    if (localStorage.getItem(LOCAL_STORAGE_KEY)) {
+    if (localStorage.getItem(SETTINGS_STORAGE_KEY)) {
       const storedSettings = JSON.parse(
-        localStorage.getItem(LOCAL_STORAGE_KEY)!
+        localStorage.getItem(SETTINGS_STORAGE_KEY)!
       );
       if (storedSettings?.length) {
         setSettings(storedSettings);

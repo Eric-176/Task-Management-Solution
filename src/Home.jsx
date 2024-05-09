@@ -1,7 +1,7 @@
 import "./navStyles.css";
 import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import NoteApplication from "./notes/NoteApplication.jsx";
-import Settings from "./settings/Settings.tsx";
+import Settings, { SETTINGS_STORAGE_KEY } from "./settings/Settings.tsx";
 import TodoApp from "./todo/TodoApp.tsx";
 import Timer from "./timer/Timer.tsx";
 import Hub from "./hub/Hub.tsx";
@@ -67,6 +67,17 @@ function Home({ googleId }) {
       }
     }
   }, [settings]);
+
+  useEffect(() => {
+    if (localStorage.getItem(SETTINGS_STORAGE_KEY)) {
+      const storedSettings = JSON.parse(
+        localStorage.getItem(SETTINGS_STORAGE_KEY)
+      );
+      if (storedSettings?.length) {
+        setSettings(storedSettings);
+      }
+    }
+  }, []);
 
   function handleLogout() {
     localStorage.setItem(LOGIN_LOCAL_STORAGE, "");
